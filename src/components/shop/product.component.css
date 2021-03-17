@@ -1,0 +1,54 @@
+.product {
+  height: 250px;
+  width: 200px;
+  margin: 15px;
+}
+
+.product .overlay {
+  height: 160px;
+  width: 180px;
+  font-size: 10px;
+  padding: 10px;
+  display: none;
+  color: white;
+  text-align: justify;
+  text-justify: inter-word;
+  background: radial-gradient(black, transparent);
+  /* border-radius: 2rem; */
+}
+
+.product:hover .overlay {
+  display: block;
+  position: absolute;
+}
+
+.product .productImage {
+  height: 180px;
+  width: 100%;
+  border-radius: "2rem";
+  background-image: url("https://picsum.photos/200");
+  background-size: "cover";
+  background-repeat: "no-repeat";
+  background-position: "center center";
+}
+
+.product .productName {
+  text-align: center;
+  margin: 5px;
+}
+
+.product .addToCartBox {
+  width: 200px;
+  margin: 5px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product .addToCartBox :is(.btn-add, .btn-minus) {
+  width: 20%;
+}
+
+.product .addToCartBox :is(input[type="text"]) {
+  width: 50%;
+}

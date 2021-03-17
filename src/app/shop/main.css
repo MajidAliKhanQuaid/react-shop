@@ -1,0 +1,49 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background: linear-gradient(to right bottom, purple, white);
+  background-repeat: no-repeat;
+  /* height: 100vh; */
+}
+
+.app {
+  display: flex;
+}
+
+.menu {
+  display: flex;
+}
+
+.dropdown {
+  position: absolute;
+}
+
+.glass {
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  /* border-radius: 2rem; */
+}
+
+li {
+  width: 150px;
+  list-style-type: none;
+}
+ul.dropdown {
+  display: none;
+}
+li.dropdown-container:hover > ul.dropdown {
+  display: block;
+}
+
+.products {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
