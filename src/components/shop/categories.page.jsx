@@ -7,7 +7,9 @@ export const Categories = () => {
       <h1>Categories</h1>
       <ul>
         {categories.map((a, b) => (
-          <li className={a}>{b}</li>
+          <li key={a} className={a}>
+            {b}
+          </li>
         ))}
       </ul>
     </>

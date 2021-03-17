@@ -18,7 +18,7 @@ export const Product = ({ product }) => {
             className="btn btn-add"
             onClick={() => {
               console.log("Added product to Cart");
-              dispatch({ type: "ITEMS_COUNT", payload: { itemsCount: 20 } });
+              dispatch({ type: "ADD_TO_CART", payload: { product: product } });
             }}
           >
             +
@@ -28,7 +28,10 @@ export const Product = ({ product }) => {
             className="btn btn-minus"
             onClick={() => {
               console.log("Removed product from Cart");
-              dispatch({ type: "ITEMS_COUNT", payload: { itemsCount: 10 } });
+              dispatch({
+                type: "REMOVE_FROM_CART",
+                payload: { product: product },
+              });
             }}
           >
             -

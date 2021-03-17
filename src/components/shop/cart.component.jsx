@@ -10,7 +10,7 @@ export const Cart = () => {
       <div>Cart Items</div>
       <ul>
         {cartItems.map((cartItem) => (
-          <li>{cartItem.name}</li>
+          <li key={cartItem.name}>{cartItem.name}</li>
         ))}
       </ul>
     </>
