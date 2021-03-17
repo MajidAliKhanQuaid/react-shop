@@ -15,9 +15,8 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { Products } from "./products.page";
 import { Product } from "./product.page";
-import { PictureOfTheDay } from "./components/PictureOfTheDay";
+
 function App() {
-  const [imgOfTheDay, setImageOfTheDay] = useState();
   useEffect(() => {
     // fetch(
     //   "https://api.nasa.gov/planetary/apod?api_key=VsU3nSqtrV2uHehGnf1jNNpXm7c9x2v6le9VvNNk"
@@ -30,8 +29,6 @@ function App() {
   }, []);
   return (
     <Provider store={store}>
-      {/* <img style={{ width: "500px" }} src={imgOfTheDay} /> */}
-      <PictureOfTheDay imagePath={"test"} title={"test"} />
       <Router>
         <div>
           <nav>

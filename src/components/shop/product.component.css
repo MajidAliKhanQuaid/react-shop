@@ -14,6 +14,7 @@
   text-align: justify;
   text-justify: inter-word;
   background: radial-gradient(black, transparent);
+  z-index: 10;
   /* border-radius: 2rem; */
 }
 

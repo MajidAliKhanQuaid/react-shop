@@ -11,7 +11,7 @@ import { HomePage } from "./components/shop/home.page";
 import { ProductsPage } from "./components/shop/products.page";
 import { store } from "./redux/store";
 import { Categories } from "./components/shop/categories.page";
-import { Cart } from "./components/shop/cart.component";
+import { Cart } from "./Cart";
 function ShopApp() {
   const products = useSelector((x) => x.cart.products);
   console.log(products);
@@ -24,30 +24,14 @@ function ShopApp() {
   return (
     <Provider store={store}>
       <>
-        <h1>
-          {products.map((x) => (
-            <div>
-              {x.name} - {x.unitprice}
-            </div>
-          ))}
-          Total Price :{" "}
-          {products.reduce(
-            (a, b) => a + parseFloat(b.unitprice) * parseFloat(b.quantity),
-            0
-          )}
-        </h1>
-        <h1>Number of Items : {products.length}</h1>
+        <Cart />
         <Router>
           <div className="app">
-            <h3>Shop App !!</h3>
-            <nav>
+            {/* <nav>
               <ul className="menu">
                 <li key="li-i" className="menu-item">
                   <Link to="/">Home</Link>
                 </li>
-                {/* <li className="menu-item">
-                  <Link to="/practice">Practice</Link>
-                </li> */}
 
                 <li key="li-ii" className="menu-item dropdown-container">
                   Categories
@@ -60,19 +44,11 @@ function ShopApp() {
                   </ul>
                 </li>
               </ul>
-            </nav>
+            </nav> */}
           </div>
-          <Cart />
           <Switch>
-            <Route exact path="/products" component={Categories} />
-            <Route path="/products/:category" component={ProductsPage} />
-            <Route exact path="/" component={HomePage} />
-            <Route
-              path="*"
-              component={() => {
-                <h1>Not Found !!</h1>;
-              }}
-            />
+            <Route exact path="/" component={ProductsPage} />
+            <Route path="*" component={() => <h1>Not Found !!</h1>} />
           </Switch>
         </Router>
       </>

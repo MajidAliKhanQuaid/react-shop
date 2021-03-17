@@ -1,0 +1,41 @@
+.cart {
+  position: fixed;
+  width: 220px;
+  height: 170px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  right: 0;
+  background-color: rgba(249, 250, 251, 0.8);
+  z-index: 100;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  padding-top: 2px;
+  padding-left: 2px;
+}
+
+.box > div:first-child {
+  width: 40%;
+  font-size: 12px;
+  color: black;
+}
+
+.box > div:nth-child(2) {
+  width: 25%;
+  font-size: 12px;
+  color: green;
+}
+
+.box > div:last-child {
+  width: 35%;
+  font-size: 12px;
+  color: black;
+  text-align: center;
+}
+.box-slide,
+.box-header {
+  border-bottom: solid black 2px;
+}

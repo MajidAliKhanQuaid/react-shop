@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { Product } from "./product.component";
 export const ProductsPage = () => {
-  const { category } = useParams();
+  // const { category } = useParams();
   const products = [
     { id: 1, name: "apple", unitprice: 10 },
     { id: 2, name: "orange", unitprice: 61.4 },
@@ -14,9 +14,6 @@ export const ProductsPage = () => {
   ];
   return (
     <>
-      <h1>
-        Category <span style={{ color: "red" }}>{category}</span> !
-      </h1>
       <div className="products">
         {products.map((product) => (
           <Product key={product.id} product={product} />
