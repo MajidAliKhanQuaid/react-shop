@@ -11,7 +11,15 @@ export const Product = ({ product }) => {
           reiciendis ad vitae quod? Nihil animi eos dolorum exercitationem
           voluptatibus minus sint!
         </div>
-        <div className="productImage"></div>
+        <div
+          className="productImage"
+          style={{
+            backgroundImage: `url(${product.url})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            backgroundPosition: "center center",
+          }}
+        ></div>
         <div className="productName">{product.name}</div>
         <div className="addToCartBox">
           <button

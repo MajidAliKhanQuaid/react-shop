@@ -1,3 +1,12 @@
+# For Deploying on Git Pages
+
+### npm run deploy
+
+Remove the redux developer tools from store.js, and set it to something like this
+export const store = compose(createStore)(rootReducer);
+
+### `npm run deploy`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
