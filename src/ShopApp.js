@@ -12,7 +12,11 @@ import { ProductsPage } from "./components/shop/products.page";
 import { store } from "./redux/store";
 import { Categories } from "./components/shop/categories.page";
 import { Cart } from "./Cart";
+import { useEffect } from "react";
 function ShopApp() {
+  useEffect(() => {
+    console.log("BASE URL", process.env.REACT_APP_BASE_URL);
+  }, []);
   const products = useSelector((x) => x.cart.products);
   console.log(products);
   const routes = [
@@ -25,6 +29,7 @@ function ShopApp() {
     <Provider store={store}>
       <>
         <Cart />
+        <h1>{process.env.REACT_APP_BASE_URL}</h1>
         <Router>
           <div className="app">
             {/* <nav>
@@ -47,7 +52,15 @@ function ShopApp() {
             </nav> */}
           </div>
           <Switch>
-            <Route exact path="/" component={ProductsPage} />
+            <Route
+              exact
+              path={`/${
+                process.env.REACT_APP_BASE_URL
+                  ? process.env.REACT_APP_BASE_URL
+                  : ""
+              }`}
+              component={ProductsPage}
+            />
             <Route path="*" component={() => <h1>Not Found !!</h1>} />
           </Switch>
         </Router>
