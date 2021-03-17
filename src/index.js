@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { NasaApp } from "./app/nasa/NasaApp";
 import ShopApp from "./app/shop/ShopApp";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";

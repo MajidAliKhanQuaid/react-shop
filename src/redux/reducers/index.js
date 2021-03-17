@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import nasaReducer from "./nasa.reducer";
+import userReducer from "./user.reducer";
+import productsReducer from "./products.reducer";
 import shopReducer from "./shop.reducer";
 
 const rootReducer = combineReducers({
   shop: shopReducer,
-  nasa: nasaReducer,
+  products: productsReducer,
+  user: userReducer,
 });
 
 export default rootReducer;
