@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import "./Cart.css";
+import "./cart.component.css";
 
 export function Cart() {
-  const products = useSelector((x) => x.cart.products);
+  const products = useSelector((x) => x.cartState.products);
   return (
     <>
       <div className="cart">
@@ -33,7 +33,7 @@ export function Cart() {
           <div>QUANTITY</div>
         </div>
         {products.map((x) => (
-          <div className="box box-items">
+          <div key={x.name} className="box box-items">
             <div>{x.name}</div>
             <div>{x.unitprice}</div>
             <div>{x.quantity}</div>

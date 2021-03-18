@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import "./../shop/product.component.css";
+import "./product.component.css";
 export const Product = ({ product }) => {
   const dispatch = useDispatch();
   return (

@@ -5,10 +5,10 @@ import shopReducer from "./shop.reducer";
 import cartReducer from "./cart.reducer";
 
 const rootReducer = combineReducers({
-  shop: shopReducer,
-  products: productsReducer,
-  user: userReducer,
-  cart: cartReducer,
+  shopState: shopReducer,
+  productState: productsReducer,
+  userState: userReducer,
+  cartState: cartReducer,
 });
 
 export default rootReducer;

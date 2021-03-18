@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const Categories = () => {
-  const categories = ["", "", "", ""];
+  const categories = ["Fresh", "Non Fresh"];
   return (
     <>
       <h1>Categories</h1>

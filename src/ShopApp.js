@@ -7,17 +7,16 @@ import {
   Link,
   useParams,
 } from "react-router-dom";
-import { HomePage } from "./components/shop/home.page";
-import { ProductsPage } from "./components/shop/products.page";
+import { HomePage } from "./pages/home.page";
+import { ProductsPage } from "./pages/products.page";
 import { store } from "./redux/store";
-import { Categories } from "./components/shop/categories.page";
-import { Cart } from "./Cart";
-import { useEffect } from "react";
+import { Categories } from "./pages/categories.page";
+import { Cart } from "./components/cart.component";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 function ShopApp() {
-  useEffect(() => {
-    console.log("BASE URL", process.env.REACT_APP_BASE_URL);
-  }, []);
-  const products = useSelector((x) => x.cart.products);
+  const products = useSelector((x) => x.cartState.products);
   console.log(products);
   const routes = [
     { id: 1, label: "Fresh", category: "fresh" },
@@ -31,34 +30,19 @@ function ShopApp() {
         <Cart />
         <h1 style={{ color: "white" }}>React Redux Example</h1>
         <Router>
-          <div className="app">
-            {/* <nav>
-              <ul className="menu">
-                <li key="li-i" className="menu-item">
-                  <Link to="/">Home</Link>
-                </li>
-
-                <li key="li-ii" className="menu-item dropdown-container">
-                  Categories
-                  <ul className="dropdown">
-                    {routes.map((x) => (
-                      <li key={x.id}>
-                        <Link to={`/products/${x.category}`}>{x.label}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              </ul>
-            </nav> */}
-          </div>
+          <Link to={`${preparePath()}`}>Home</Link>
+          <Link to={`${preparePath("categories")}`}>Categories</Link>
+          <Link to={`${preparePath("products")}`}>Products</Link>
           <Switch>
+            <Route exact path={`${preparePath()}`} component={HomePage} />
             <Route
               exact
-              path={`/${
-                process.env.REACT_APP_BASE_URL
-                  ? process.env.REACT_APP_BASE_URL
-                  : ""
-              }`}
+              path={`${preparePath("categories")}`}
+              component={Categories}
+            />
+            <Route
+              exact
+              path={`${preparePath("products")}`}
               component={ProductsPage}
             />
             <Route path="*" component={() => <h1>Not Found !!</h1>} />
@@ -67,6 +51,15 @@ function ShopApp() {
       </>
     </Provider>
   );
+}
+
+function preparePath(originalRoute) {
+  // e.g. originalRoute /categories
+  // maps to PREFIX/categories i.e. majidalikhanquaid.github.io/react-shop/categories
+  if (!originalRoute) originalRoute = "";
+  return `/${
+    process.env.REACT_APP_BASE_URL ? process.env.REACT_APP_BASE_URL + "/" : ""
+  }${originalRoute}`;
 }
 
 export default ShopApp;
