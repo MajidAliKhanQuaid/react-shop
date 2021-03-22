@@ -1,7 +1,19 @@
 const initialState = { products: [] };
 export default function cartReducer(state = initialState, action) {
   console.log("cart.reducer  [state]", state, " [action] ", action);
-  if (action.type == "ADD_TO_CART") {
+  if (action.type == "REFRESH_CART") {
+    let { items } = action.payload;
+    items = items.map((item) => {
+      return {
+        id: item.productid,
+        name: item.name,
+        quantity: item.quantity,
+        unitprice: item.unitprice,
+      };
+    });
+
+    return { ...state, products: items };
+  } else if (action.type == "ADD_TO_CART") {
     const { product } = action.payload;
     // let { products } = state;
     let products = [...state.products];

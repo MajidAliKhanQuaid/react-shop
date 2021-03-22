@@ -4,20 +4,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Product } from "../components/product.component";
 export const ProductsPage = () => {
-  const storeProducts = useSelector((state) => state.productState.products);
+  const storeProducts = useSelector((state) => state.productState.items);
   const [products, setProducts] = useState(storeProducts ? storeProducts : []);
   const dispatch = useDispatch();
+  let { category } = useParams();
+  // console.log(params);
   useEffect(() => {
-    axios
-      .get("http://makq.xyz/products/1/1")
-      .then(({ data }) => {
-        console.log("Success ", data.data);
-        setProducts(data.data);
-        dispatch({ type: "PRODUCTS_UPDATE", payload: data.data });
-      })
-      .catch((err) => {
-        console.log("error ", err);
-      });
+    // category/pageSize/pageNo
+    if (!category) {
+      category = 0;
+    }
+    console.log("Store Products before ", storeProducts);
+    if (!storeProducts || (storeProducts && storeProducts.length == 0)) {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/products/${category}/1/1`)
+        .then(({ data }) => {
+          var pProducts = data.payload;
+          console.log("Success ", pProducts);
+          setProducts(pProducts);
+          dispatch({ type: "PRODUCTS_UPDATE", payload: pProducts });
+        })
+        .catch((err) => {
+          console.log("error ", err);
+        });
+    }
   }, []);
   // const products = [
   //   {

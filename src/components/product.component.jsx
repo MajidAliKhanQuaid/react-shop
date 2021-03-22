@@ -1,6 +1,8 @@
-import { useDispatch } from "react-redux";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import "./product.component.css";
 export const Product = ({ product }) => {
+  const storeProducts = useSelector((state) => state.productState.items);
   const dispatch = useDispatch();
   return (
     <>
@@ -14,7 +16,7 @@ export const Product = ({ product }) => {
         <div
           className="productImage"
           style={{
-            backgroundImage: `url(${product.url})`,
+            backgroundImage: `url(${product.imageurl})`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center center",
@@ -25,8 +27,37 @@ export const Product = ({ product }) => {
           <button
             className="btn btn-add"
             onClick={() => {
-              console.log("Added product to Cart");
-              dispatch({ type: "ADD_TO_CART", payload: { product: product } });
+              var data = {
+                productid: product.id,
+              };
+              console.log("Added product to Cart ", data);
+              axios
+                .post(
+                  `${process.env.REACT_APP_API_URL}/cart/add`,
+                  JSON.stringify(data)
+                )
+                .then(({ data }) => {
+                  var pProduct = data.payload.product;
+                  console.log("Data came after ADD_TO_CART ", data);
+                  console.log("productid ", pProduct.id);
+                  const cProduct = storeProducts.find(
+                    (x) => x.id == pProduct.id
+                  );
+                  if (cProduct) {
+                    dispatch({
+                      type: "ADD_TO_CART",
+                      payload: {
+                        product: {
+                          id: cProduct.id,
+                          name: cProduct.name,
+                          unitprice: cProduct.unitprice,
+                          quantity: cProduct.quantity,
+                        },
+                      },
+                    });
+                  }
+                })
+                .catch((err) => {});
             }}
           >
             +
@@ -35,11 +66,36 @@ export const Product = ({ product }) => {
           <button
             className="btn btn-minus"
             onClick={() => {
-              console.log("Removed product from Cart");
-              dispatch({
-                type: "REMOVE_FROM_CART",
-                payload: { product: product },
-              });
+              var data = {
+                productid: product.id,
+              };
+              axios
+                .post(
+                  `${process.env.REACT_APP_API_URL}/cart/remove`,
+                  JSON.stringify(data)
+                )
+                .then(({ data }) => {
+                  console.log("Data came after REMOVE_FROM_CART ", data);
+                  var pProduct = data.payload.product;
+                  console.log("productid ", pProduct.id);
+                  const cProduct = storeProducts.find(
+                    (x) => x.id == pProduct.id
+                  );
+                  if (cProduct) {
+                    dispatch({
+                      type: "REMOVE_FROM_CART",
+                      payload: {
+                        product: {
+                          id: cProduct.id,
+                          name: cProduct.name,
+                          unitprice: cProduct.unitprice,
+                          quantity: cProduct.quantity,
+                        },
+                      },
+                    });
+                  }
+                })
+                .catch((err) => {});
             }}
           >
             -

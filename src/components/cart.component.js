@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import "./cart.component.css";
 
-export function Cart() {
-  const products = useSelector((x) => x.cartState.products);
+export function Cart({ products }) {
   return (
     <>
       <div className="cart">

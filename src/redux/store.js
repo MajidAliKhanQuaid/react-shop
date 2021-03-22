@@ -11,7 +11,7 @@ import rootReducer from "./reducers/";
 //   return state;
 // }
 
-// export const store = createStore(reducer);
-export const store = compose(
-  window.devToolsExtension && window.devToolsExtension()
-)(createStore)(rootReducer);
+export const store = createStore(rootReducer);
+// export const store = compose(
+//   window.devToolsExtension && window.devToolsExtension()
+// )(createStore)(rootReducer);

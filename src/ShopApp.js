@@ -1,5 +1,5 @@
 import "./main.css";
-import { Provider, useSelector } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,21 +13,29 @@ import { store } from "./redux/store";
 import { Categories } from "./pages/categories.page";
 import { Cart } from "./components/cart.component";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import preparePath from "./PreparePath";
+import axios from "./interceptor";
 
 function ShopApp() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/cart`,
+        JSON.stringify({ userid: 1 })
+      )
+      .then(({ data }) => {
+        console.log("ShopApp ", data);
+        dispatch({ type: "REFRESH_CART", payload: data.payload });
+      })
+      .catch((err) => {});
+  }, []);
   const products = useSelector((x) => x.cartState.products);
-  console.log(products);
-  const routes = [
-    { id: 1, label: "Fresh", category: "fresh" },
-    { id: 2, label: "Crockery", category: "crockery" },
-    { id: 3, label: "Shoes", category: "shoes" },
-    { id: 4, label: "Furniture", category: "furniture" },
-  ];
+
   return (
     <Provider store={store}>
       <>
-        <Cart />
+        <Cart products={products} />
         <h1 style={{ color: "white" }}>React Redux Example</h1>
         <Router>
           <Link to={`${preparePath()}`}>Home</Link>
@@ -42,7 +50,7 @@ function ShopApp() {
             />
             <Route
               exact
-              path={`${preparePath("products")}`}
+              path={`${preparePath("products/:category?")}`}
               component={ProductsPage}
             />
             <Route path="*" component={() => <h1>Not Found !!</h1>} />
@@ -51,15 +59,6 @@ function ShopApp() {
       </>
     </Provider>
   );
-}
-
-function preparePath(originalRoute) {
-  // e.g. originalRoute /categories
-  // maps to PREFIX/categories i.e. majidalikhanquaid.github.io/react-shop/categories
-  if (!originalRoute) originalRoute = "";
-  return `/${
-    process.env.REACT_APP_BASE_URL ? process.env.REACT_APP_BASE_URL + "/" : ""
-  }${originalRoute}`;
 }
 
 export default ShopApp;
