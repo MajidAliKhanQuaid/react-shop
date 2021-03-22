@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import preparePath from "./../PreparePath";
 
 export const Categories = () => {
@@ -31,7 +32,7 @@ export const Categories = () => {
         {categories.map((category) => (
           <div key={category.id}>
             {/* route /products/:category */}
-            <a href={`${preparePath("products/" + category.id)}`}>
+            <Link to={`${preparePath("products/" + category.id)}`}>
               <div>
                 {category.id} {category.name}
               </div>
@@ -41,7 +42,7 @@ export const Categories = () => {
                   src={category.imageurl}
                 />
               </div>
-            </a>
+            </Link>
           </div>
         ))}
       </ul>
